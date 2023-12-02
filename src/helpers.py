@@ -9,7 +9,7 @@ def read_file(filename):
     file = open(filename_fullpath, "r")
 
     # read whole file to a string
-    data = file.read()
+    data = str(file.read()).lower()
     #print(f'{data}')
     # close file
     file.close()
@@ -38,14 +38,14 @@ class StringHelpers:
     def FindNumsInStr(self, string):
         str_indexes = {}
         for num in self.LookupNums:
-            index = 0
-            s = string
-            while num in s:
-                nums = [num,num2words.num2words(num)]
-                for n in nums:    
+            nums = [num,num2words.num2words(num)]
+            for n in nums:
+                index = 0
+                s = string
+                while n in s:
                     i = s.find(n)
                     index = index + i
-                    str_indexes[index] = n
+                    str_indexes[index] = num
                     s_start = i+1
                     s_end = len(s)
                     s = s[s_start:s_end]
