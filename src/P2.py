@@ -33,7 +33,14 @@ class Game:
             if p.isPossible(condition) == False:
                 return False
         return True
-                
+    
+    def getPower(self):
+        cube = {"red":0, "green": 0, "blue": 0}
+        for p in self.pulls:
+            for c in p.cubes:
+                if p.cubes[c] > cube[c]:
+                    cube[c] = p.cubes[c]
+        return cube["red"] * cube["green"] * cube["blue"]
 
 class Games:
     def __init__(self) -> None:
@@ -51,10 +58,13 @@ def run():
         games.AddGame(l)
         #print(l)
     sum = 0
+    sum2 = 0
     for g in games.games:
         if g.isPossible(condition):
             sum += g.game_num
-    print(sum)
+        sum2 += g.getPower()
+    print("p2-1: " + str(sum))
+    print("p2-2: " + str(sum2))
     
     
 
